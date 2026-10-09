@@ -2,7 +2,7 @@ import chalk from "chalk"
 import express from "express"
 import userRouter, { routes as userRoutes } from "./modules/user/user.controller.js"
 import { DBconnection } from "./DB/db.connection.js"
-import { providerEnum } from "./modules/user/user.types.js"
+import UserModel from "./DB/Models/user.model.js"
 const bootstrap = async () => {
 
     const app = express()
@@ -10,10 +10,7 @@ const bootstrap = async () => {
     const port = 3000
 
     await DBconnection()
-   
-
-
-    app.get("/", (req, res, next) => {
+    app.get("/", async (req, res, next) => {
         res.status(200).json({ msg: "hello world in API BACKEND" })
     })
 

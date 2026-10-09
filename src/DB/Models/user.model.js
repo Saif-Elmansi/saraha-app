@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { genderEnum, providerEnum, roleEnum } from "../../modules/user/user.types";
+import { genderEnum, providerEnum, roleEnum } from "../../modules/user/user.types.js";
 
 const userSchema = new Schema(
     {
@@ -81,11 +81,20 @@ const userSchema = new Schema(
         optimisticConcurrency: true,
         toJSON: {
             virtuals: true,
-            getters: true
+            getters: true,
+            transform(doc, ret) {
+                delete ret.id
+                delete ret.password
+                return ret
+            }
         },
         toObject: {
             virtuals: true,
-            getters: true
+            getters: true,
+            transform(doc, ret) {
+                delete ret.id
+                return ret
+            }
         },
         virtuals: {
             fullName: {

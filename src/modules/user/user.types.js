@@ -10,6 +10,6 @@ export const providerEnum = {
 }
 export const roleEnum = {
     User: 0,
-    Admin: 1,
+    Admin: 1
     
 }
