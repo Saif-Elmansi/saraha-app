@@ -17,8 +17,17 @@ const bootstrap = async () => {
 
     app.use(userRoutes.base, userRouter)
 
+    app.use((req, res, next) => {
+        res.status(404).json({ msg: "Route not found" });
+    });
 
-
+    app.use((err, req, res, next) => {
+        const statusCode = err.cause?.statusCode || err.statusCode || 500;
+        return res.status(statusCode).json({
+            msg: err.message,
+            statusCode,
+        });
+    });
 
     app.listen(port, (req, res, next) => {
         console.log(chalk.green(`server is running ${port}`));

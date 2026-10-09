@@ -17,16 +17,24 @@ const userSchema = new Schema(
             minlength: [3, "اسم الاخير يجب ألا يقل عن 3 أحرف"],
             maxlength: [30, "اسم الاخير يجب ألا يزيد عن 30 حرف"],
         },
+        userName: {
+            type: String,
+            required: [true, "اسم المستخدم مطلوب"],
+            unique: true,
+            lowercase: true,
+            trim: true,
+            minlength: [3, "اسم المستخدم يجب ألا يقل عن 3 أحرف"],
+            maxlength: [20, "اسم المستخدم يجب ألا يزيد عن 20 حرف"],
+            match: [
+                /^[a-zA-Z0-9_]+$/,
+                "اسم المستخدم يجب أن يحتوي على حروف وأرقام و _ فقط بدون مسافات",
+            ],
+        },
         email: {
             type: String,
             required: [true, "البريد الإلكتروني مطلوب"],
             unique: true,
-            lowercase: true,
             trim: true,
-            match: [
-                /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                "يرجى إدخال بريد إلكتروني صالح",
-            ],
         },
         phone: {
             type: String,
