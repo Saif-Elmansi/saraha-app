@@ -14,6 +14,7 @@ const bootstrap = async () => {
         res.status(200).json({ msg: "hello world in API BACKEND" })
     })
 
+    console.log(process.env.port);
 
     app.use(userRoutes.base, userRouter)
 
